@@ -30,24 +30,6 @@ public class ReceitaService {
         this.ingredienteRepository = ingredienteRepository;
     }
 
-    public ReceitaResponseDTO criarReceita(ReceitaRequestDTO dto) {
-        // Busca categoria
-        Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada: " + dto.getCategoriaId()));
-
-        // Busca todos os ingredientes do banco
-        List<Ingrediente> ingredientesDisponiveis = ingredienteRepository.findAll();
-
-        // Converte DTO em entidade
-        Receita receita = ReceitaMapper.toEntity(dto, categoria, ingredientesDisponiveis);
-
-        // Salva no banco
-        Receita receitaSalva = receitaRepository.save(receita);
-
-        // Retorna DTO de resposta
-        return ReceitaMapper.toDTO(receitaSalva);
-    }
-
     // Listar todas as receitas
     public List<ReceitaResponseDTO> listarTodas() {
         return ReceitaMapper.toDTOList(receitaRepository.findAll());
@@ -60,7 +42,7 @@ public class ReceitaService {
         return ReceitaMapper.toDTO(receita);
     }
 
-    // Criar receita
+    // Salvar receita
     public ReceitaResponseDTO salvar(ReceitaRequestDTO dto) {
         Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria com ID " + dto.getCategoriaId() + " não encontrada"));

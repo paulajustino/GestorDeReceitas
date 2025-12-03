@@ -2,7 +2,9 @@ package org.grupo1.gestordereceitas.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "receita")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Receita {
 
     @Id
