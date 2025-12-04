@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.grupo1.gestordereceitas.model.Ingrediente;
 import org.grupo1.gestordereceitas.service.IngredienteService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class IngredienteController {
             @ApiResponse(responseCode = "400", description = "Erro nos dados enviados")
     })
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Ingrediente criarIngrediente(@RequestBody Ingrediente ingrediente) {
         return ingredienteService.salvar(ingrediente);
     }
@@ -66,6 +68,7 @@ public class IngredienteController {
             @ApiResponse(responseCode = "404", description = "Ingrediente não encontrado")
     })
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarIngrediente(@PathVariable Long id) {
         ingredienteService.deletar(id);
     }

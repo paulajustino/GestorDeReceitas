@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.grupo1.gestordereceitas.model.Categoria;
 import org.grupo1.gestordereceitas.service.CategoriaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,6 +56,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos para criação da categoria")
     })
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Categoria criarCategoria(@RequestBody Categoria categoria) {
         return categoriaService.salvar(categoria);
     }
@@ -81,6 +83,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "404", description = "Categoria não encontrada")
     })
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarCategoria(@PathVariable Long id) {
         categoriaService.deletar(id);
     }

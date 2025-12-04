@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.grupo1.gestordereceitas.dto.ReceitaRequestDTO;
 import org.grupo1.gestordereceitas.dto.ReceitaResponseDTO;
 import org.grupo1.gestordereceitas.service.ReceitaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class ReceitaController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos para criação da receita")
     })
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ReceitaResponseDTO criarReceita(@RequestBody ReceitaRequestDTO dto) {
         return receitaService.salvar(dto);
     }
@@ -95,6 +97,7 @@ public class ReceitaController {
             @ApiResponse(responseCode = "404", description = "Receita não encontrada")
     })
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarReceita(@PathVariable Long id) {
         receitaService.deletar(id);
     }
